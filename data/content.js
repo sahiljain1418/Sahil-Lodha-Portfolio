@@ -1,45 +1,39 @@
-export const projects = [
+
+export const linkedin = "https://www.linkedin.com/in/sahil-lodha-012a63265/";
+
+export const lanes = [
   {
-    no: "01",
-    tag: "FINANCE · MARKET RESEARCH",
-    title: "Pan-India Authorised Person Analysis",
-    description: "Working with 70,000+ AP records to map geographical concentration, market density and business white spaces.",
-    image: "/images/finance/pan-india-analysis.png"
-  },
-  {
-    no: "02",
-    tag: "FINANCE · DATA",
-    title: "NSE Broker Dashboard",
-    description: "A data-led view of broker and AP networks designed to turn large datasets into business conversations.",
+    number: "01",
+    verb: "I ANALYSE",
+    title: "Finance",
+    copy: "Markets, portfolios, research and the business opportunities hidden inside data.",
     image: "/images/finance/nse-broker-dashboard.png"
   },
   {
-    no: "03",
-    tag: "WEALTH · ADVISORY",
-    title: "Portfolio Review Framework",
-    description: "Studying portfolio concentration, client concerns and restructuring conversations through a client-first lens.",
-    image: "/images/finance/portfolio-analysis.png"
+    number: "02",
+    verb: "I COMMUNICATE",
+    title: "Marketing",
+    copy: "Consumer thinking, outreach, pitches and why the right story makes an idea stick.",
+    image: "/images/journey/journey-06.jpeg"
   },
   {
-    no: "04",
-    tag: "EQUITY RESEARCH",
-    title: "Shakti Pumps Investment Thesis",
-    description: "A fundamental and technical research exercise connecting industry context, company performance and market signals.",
-    image: "/images/finance/investment-thesis.png"
+    number: "03",
+    verb: "I LEAD",
+    title: "People",
+    copy: "Student representation, events, teams and the unglamorous follow-ups that make things happen.",
+    image: "/images/journey/journey-08.jpeg"
   }
 ];
 
-export const posts = [
-  { category: "FINANCE", title: "What client conversations taught me about financial trust", note: "Draft idea · Internship notes" },
-  { category: "MARKETING", title: "Why the best pitch starts before the presentation", note: "Draft idea · FinMark" },
-  { category: "LEADERSHIP", title: "Leadership is mostly following up. Again.", note: "Draft idea · Campus" }
+export const projects = [
+  ["70,056", "AP records", "Pan-India market mapping", "/images/finance/pan-india-analysis.png"],
+  ["NSE", "broker network", "Data to business conversations", "/images/finance/nse-broker-dashboard.png"],
+  ["200+", "portfolio reviews", "Client-first advisory exposure", "/images/finance/portfolio-analysis.png"],
+  ["EQUITY", "research", "Shakti Pumps investment thesis", "/images/finance/investment-thesis.png"]
 ];
 
-export const wins = [
-  "Secretary · Student Council",
-  "Anand Rathi Internship",
-  "Hosted IMPELz",
-  "Dance Competition Winner",
-  "Event & Outreach Coordinator",
-  "Hosting Coordinator"
+export const thoughts = [
+  ["FINANCE", "What client conversations taught me about financial trust"],
+  ["MARKETING", "Why the best pitch starts before the presentation"],
+  ["LEADERSHIP", "Leadership is mostly following up. Again."]
 ];
