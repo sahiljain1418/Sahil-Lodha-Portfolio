@@ -1,179 +1,618 @@
+"use client";
 
-import Image from "next/image";
-import Nav from "../components/Nav";
-import Reveal from "../components/Reveal";
-import { linkedin, lanes, projects, thoughts } from "../data/content";
+import { useState } from "react";
 
-const moments = ["02","04","05","07","10","11","13","14"];
+const paths = [
+  {
+    id: "finance",
+    number: "01",
+    title: "THE FINANCE GUY",
+    subtitle: "Markets. Portfolios. Conversion.",
+    description:
+      "Finance & Marketing major with hands-on exposure to wealth management, B2B advisory and portfolio conversations.",
+    stat: "₹1Cr+",
+    statText: "business impact supported in 2.5 months",
+    target: "finance",
+  },
+  {
+    id: "leader",
+    number: "02",
+    title: "THE COUNCIL GUY",
+    subtitle: "Lead. Coordinate. Solve.",
+    description:
+      "Secretary of the Student Council at IMT Hyderabad — working across students, administration, events and campus operations.",
+    stat: "Secretary",
+    statText: "Student Council · IMT Hyderabad",
+    target: "leadership",
+  },
+  {
+    id: "stage",
+    number: "03",
+    title: "THE STAGE GUY",
+    subtitle: "Mic on. Crowd up.",
+    description:
+      "Host, dancer and event professional. From coordinating hosts to taking the stage at IMPELZ.",
+    stat: "IMPELZ",
+    statText: "hosting · performance · events",
+    target: "stage",
+  },
+  {
+    id: "marketing",
+    number: "04",
+    title: "THE MARKETING GUY",
+    subtitle: "Stories. Strategy. People.",
+    description:
+      "Exploring the intersection of finance and marketing — where numbers meet communication and consumer behaviour.",
+    stat: "FinMark",
+    statText: "finance × marketing",
+    target: "marketing",
+  },
+];
+
+const metrics = [
+  ["300+", "Client Interactions", "Conversations across advisory and B2B relationships."],
+  ["120+", "Portfolios Reviewed", "Portfolio-level review and opportunity identification."],
+  ["₹50L", "PMS Pipeline", "Potential PMS business pipeline generated."],
+  ["₹25L", "PMS Top-Up", "PMS top-up opportunity supported."],
+  ["₹20L", "Portfolio Shift", "Portfolio restructuring opportunity identified."],
+  ["₹7.1L", "Lump Sum", "Lump-sum investment business supported."],
+  ["₹5L", "RIA Closure", "Fee advisory closure contribution."],
+  ["26", "SIP Registrations", "Systematic investment registrations."],
+  ["₹1.20L", "Monthly SIP Book", "Monthly SIP book generated."],
+  ["16", "Commodity Conversions", "Commodity segment client conversions."],
+  ["₹3L", "Commodity Revenue", "Revenue opportunity through commodity conversions."],
+  ["20", "Reactivations", "Dormant account reactivations."],
+  ["₹30K", "Reactivation Revenue", "Revenue generated through reactivation efforts."],
+  ["4.82/5", "Training Rating", "Rating received for a Pan-India B2B training session."],
+];
+
+const leadership = [
+  {
+    year: "NOW",
+    role: "SECRETARY",
+    organisation: "Student Council · IMT Hyderabad",
+    copy:
+      "From representing student concerns to coordinating with administration — leadership became less about the title and more about being available when something needed to move.",
+  },
+  {
+    year: "2025",
+    role: "JUNIOR STUDENT COUNCIL",
+    organisation: "IMT Hyderabad",
+    copy:
+      "Campus operations, grievance coordination, event execution and the unplanned situations that never make it to a calendar.",
+  },
+  {
+    year: "CSR",
+    role: "PAHEL",
+    organisation: "YSLP · Anand Ka Mela · Jagriti",
+    copy:
+      "Teaching children every Sunday for three months, building fundraising stalls and using street theatre to communicate causes.",
+  },
+];
+
+const stageModes = {
+  host: {
+    eyebrow: "HOSTING MODE",
+    title: "GIVE ME THE MIC.",
+    copy:
+      "Hosting is not about getting attention. It is about making sure every performer, speaker and moment lands with the audience.",
+    image: "/hosting-coordinator.jpeg",
+  },
+  outreach: {
+    eyebrow: "EVENTS MODE",
+    title: "ONLINE. ON CALL. ON IT.",
+    copy:
+      "Events and outreach taught me sponsorship conversations, coordination, negotiation and how to keep moving when the plan changes.",
+    image: "/events-outreach.jpeg",
+  },
+  dance: {
+    eyebrow: "PERFORMANCE MODE",
+    title: "AND SOMETIMES, I DANCE.",
+    copy:
+      "Competitive dance is the part of my portfolio that refuses to fit into an Excel sheet. The trophies help explain it.",
+    image: "/dance-trophy.jpeg",
+  },
+};
 
 export default function Home() {
+  const [selectedPath, setSelectedPath] = useState(null);
+  const [selectedMetric, setSelectedMetric] = useState(null);
+  const [stageMode, setStageMode] = useState("host");
+
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
+  const choosePath = (path) => {
+    setSelectedPath(path.id);
+    scrollTo(path.target);
+  };
+
   return (
-    <main id="top">
-      <Nav />
+    <main>
+      <nav className="nav">
+        <button className="logo" onClick={() => scrollTo("home")}>
+          SL.
+        </button>
 
-      <section className="v2Hero">
-        <div className="v2HeroPhoto">
-          <Image src="/images/journey/journey-15.jpeg" alt="Sahil Lodha" fill priority />
+        <div className="navLinks">
+          <button onClick={() => scrollTo("finance")}>FINANCE</button>
+          <button onClick={() => scrollTo("leadership")}>LEADERSHIP</button>
+          <button onClick={() => scrollTo("stage")}>STAGE</button>
+          <button onClick={() => scrollTo("off-clock")}>OFF THE CLOCK</button>
         </div>
-        <div className="v2HeroShade" />
-        <div className="v2Topline"><span>SAHIL LODHA · PORTFOLIO</span><span>HYDERABAD / INDIA</span></div>
-        <div className="v2HeroCopy">
-          <p>FINANCE BRAIN. MARKETING CURIOSITY.</p>
-          <h1>USUALLY SOMEWHERE<br/><em>NEAR A MIC.</em></h1>
-          <div className="v2HeroFoot">
-            <span>Finance × Marketing × People</span>
-            <a href="#story">SCROLL TO KNOW THE GUY BEHIND THE CV ↓</a>
+
+        <a
+          className="navLinkedin"
+          href="https://www.linkedin.com/in/sahil-lodha-012a63265/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          LINKEDIN ↗
+        </a>
+      </nav>
+
+      <section className="hero" id="home">
+        <div className="heroPhotoWrap">
+          <img
+            className="heroPhoto"
+            src="/profile-formal.jpeg"
+            alt="Sahil Lodha"
+          />
+          <div className="heroPhotoShade" />
+        </div>
+
+        <div className="heroTop">
+          <span>PORTFOLIO · 2026</span>
+          <span>FINANCE × MARKETING</span>
+        </div>
+
+        <div className="heroContent">
+          <p className="heroIntro">HI, I AM</p>
+
+          <h1>
+            SAHIL
+            <br />
+            <span>LODHA.</span>
+          </h1>
+
+          <div className="heroBottom">
+            <p>
+              I ANALYSE. I COMMUNICATE.
+              <br />
+              I LEAD. I HOST. I BUILD.
+            </p>
+
+            <button className="roundButton" onClick={() => scrollTo("choose")}>
+              EXPLORE
+              <span>↓</span>
+            </button>
           </div>
         </div>
-        <div className="floatWord fw1">FINANCE</div>
-        <div className="floatWord fw2">MARKETING</div>
-        <div className="floatWord fw3">HOST</div>
-        <div className="floatWord fw4">LEADER</div>
-        <div className="floatWord fw5">TRAVELLER</div>
+
+        <div className="scrollLabel">SCROLL TO MEET THE DIFFERENT SAHILS ↓</div>
       </section>
 
-      <section id="story" className="v2Intro">
-        <Reveal>
-          <span className="v2Index">01 / SO, WHAT DO I ACTUALLY DO?</span>
-          <h2>I LIKE BEING WHERE<br/><em>ANALYSIS MEETS PEOPLE.</em></h2>
-          <p className="v2Lead">Finance made me look closer at the numbers. Marketing made me ask why people choose what they choose. Everything else taught me how to bring people along.</p>
-        </Reveal>
-        <div className="laneGrid">
-          {lanes.map((lane) => (
-            <Reveal className="lane" key={lane.number}>
-              <Image src={lane.image} alt="" fill />
-              <div className="laneShade" />
-              <span>{lane.number}</span>
-              <div><p>{lane.verb}</p><h3>{lane.title}</h3><small>{lane.copy}</small></div>
-            </Reveal>
+      <section className="chooseSection" id="choose">
+        <div className="sectionIntro">
+          <span>01 / CHOOSE YOUR ROUTE</span>
+          <h2>
+            WHICH SAHIL
+            <br />
+            DO YOU WANT TO MEET?
+          </h2>
+          <p>
+            This is not a résumé in website form. Pick a side of my work and
+            enter from there.
+          </p>
+        </div>
+
+        <div className="pathGrid">
+          {paths.map((path) => (
+            <button
+              key={path.id}
+              className={`pathCard ${
+                selectedPath === path.id ? "active" : ""
+              }`}
+              onClick={() => choosePath(path)}
+            >
+              <div className="pathNumber">{path.number}</div>
+
+              <div>
+                <span className="pathSubtitle">{path.subtitle}</span>
+                <h3>{path.title}</h3>
+                <p>{path.description}</p>
+              </div>
+
+              <div className="pathStat">
+                <strong>{path.stat}</strong>
+                <span>{path.statText}</span>
+              </div>
+
+              <div className="pathArrow">↗</div>
+            </button>
           ))}
         </div>
       </section>
 
-      <section id="finmark" className="financeStory">
-        <div className="financeSticky">
-          <Reveal>
-            <span className="v2Index light">02 / THE FINANCE SIDE OF ME</span>
-            <h2>MY SUMMER WASN'T<br/>SPENT <em>OBSERVING.</em></h2>
-            <p>70,056 AP records. Client calls. Portfolio conversations. SIPs. PMS. B2B business development.</p>
-            <p className="financePunch">Data showed me where the opportunity was.<br/><strong>People showed me whether it would convert.</strong></p>
-          </Reveal>
+      <section className="financeSection" id="finance">
+        <div className="financeHeading">
+          <span>02 / FINANCE TERMINAL</span>
+          <h2>THE NUMBERS HAVE A STORY.</h2>
+          <p>
+            My internship at Anand Rathi moved from learning products to
+            reviewing portfolios, speaking with clients, supporting conversion
+            opportunities and training the B2B network.
+          </p>
         </div>
-        <div className="financeCards">
-          <Reveal className="corporateShot"><Image src="/images/internship/fm-session.jpeg" alt="Presenting at Anand Rathi" width={1300} height={900}/><span>ANAND RATHI · 2026</span></Reveal>
-          {projects.map(([big, label, copy, image], i) => (
-            <Reveal className="financeCard" key={big+label}>
-              <div className="financeVisual"><Image src={image} alt={copy} fill /></div>
-              <span>0{i+1}</span><strong>{big}</strong><h3>{label}</h3><p>{copy}</p>
-            </Reveal>
+
+        <div className="terminal">
+          <div className="terminalTop">
+            <div>
+              <span className="terminalLive">● LIVE CASE FILE</span>
+              <h3>INTERNSHIP PERFORMANCE</h3>
+            </div>
+
+            <div className="terminalCompany">
+              ANAND RATHI
+              <span>BUSINESS DEVELOPMENT · B2B</span>
+            </div>
+          </div>
+
+          <div className="terminalHero">
+            <div>
+              <span>2.5 MONTHS</span>
+              <strong>₹1Cr+</strong>
+              <p>BUSINESS IMPACT SUPPORTED / OPPORTUNITIES GENERATED</p>
+            </div>
+
+            <div className="terminalInstruction">
+              CLICK ANY METRIC
+              <span>TO OPEN THE STORY ↘</span>
+            </div>
+          </div>
+
+          <div className="metricGrid">
+            {metrics.map((metric) => (
+              <button
+                className="metric"
+                key={metric[1]}
+                onClick={() => setSelectedMetric(metric)}
+              >
+                <strong>{metric[0]}</strong>
+                <span>{metric[1]}</span>
+                <small>OPEN +</small>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="financeProof">
+          <div className="proofImage">
+            <img
+              src="/internship-dashboard.jpeg"
+              alt="Internship performance dashboard"
+            />
+          </div>
+
+          <div className="proofCopy">
+            <span>THE DASHBOARD</span>
+            <h3>FROM CALLS TO CONVERSIONS.</h3>
+            <p>
+              A visual snapshot of my internship outcomes across portfolio
+              reviews, PMS opportunities, SIPs, commodity conversions,
+              reactivations and training.
+            </p>
+
+            <button onClick={() => setSelectedMetric(metrics[0])}>
+              EXPLORE PERFORMANCE ↗
+            </button>
+          </div>
+        </div>
+
+        <div className="trainingBlock">
+          <div>
+            <span>B2B KNOWLEDGE EXPRESS</span>
+            <h3>I DIDN&apos;T JUST LEARN. I TAUGHT.</h3>
+            <p>
+              I conducted a Pan-India B2B training session and received a
+              4.82/5 rating. Training became another proof that finance only
+              creates value when you can communicate it clearly.
+            </p>
+
+            <div className="rating">
+              <strong>4.82</strong>
+              <span>/ 5 TRAINING RATING</span>
+            </div>
+          </div>
+
+          <div className="trainingPhoto">
+            <img src="/training.jpeg" alt="B2B training session" />
+          </div>
+        </div>
+      </section>
+
+      <section className="leadershipSection" id="leadership">
+        <div className="leadershipTitle">
+          <span>03 / LEADERSHIP</span>
+          <h2>
+            TITLES ARE SHORT.
+            <br />
+            RESPONSIBILITY ISN&apos;T.
+          </h2>
+        </div>
+
+        <div className="timeline">
+          {leadership.map((item, index) => (
+            <article className="timelineItem" key={item.role}>
+              <div className="timelineNumber">0{index + 1}</div>
+
+              <div className="timelineYear">{item.year}</div>
+
+              <div className="timelineRole">
+                <h3>{item.role}</h3>
+                <span>{item.organisation}</span>
+              </div>
+
+              <p>{item.copy}</p>
+            </article>
           ))}
-          <Reveal className="lorCallout">
-            <p>THE RECEIPTS</p>
-            <h3>200+ portfolio reviews.<br/>500+ client interactions.</h3>
-            <a href="/documents/anand-rathi-lor.pdf" target="_blank">VIEW MY ANAND RATHI LOR ↗</a>
-          </Reveal>
+        </div>
+
+        <div className="leadershipGallery">
+          <figure className="galleryWide">
+            <img
+              src="/coordinators.jpeg"
+              alt="Student coordinators"
+              className="containImage"
+            />
+            <figcaption>COORDINATION / PEOPLE / EXECUTION</figcaption>
+          </figure>
+
+          <figure>
+            <img src="/csr.jpeg" alt="CSR initiative" />
+            <figcaption>CSR / PAHEL / YSLP</figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="/stall-exhibition.jpeg"
+              alt="Stall exhibition"
+              className="rotateImage"
+            />
+            <figcaption>ANAND KA MELA / FUNDRAISING</figcaption>
+          </figure>
         </div>
       </section>
 
-      <section id="hosting" className="micStory">
-        <Reveal className="micHeading">
-          <span className="v2Index light">03 / THE MIC</span>
-          <h2>SOMEHOW, I ALWAYS<br/><em>FIND THE MIC.</em></h2>
-        </Reveal>
-        <div className="impelzFilm">
-          <video autoPlay muted loop playsInline src="/videos/impelz-hosting.mp4" />
-          <div className="filmShade"/>
-          <div className="filmCopy"><span>IMPELZ · INTER-COLLEGE FEST</span><h3>THE BIGGEST STAGE<br/>I'D HOSTED.</h3><p>And then the mic was live.</p></div>
+      <section className="stageSection" id="stage">
+        <div className="stageHeader">
+          <span>04 / STAGE & EVENTS</span>
+          <h2>THERE IS ANOTHER SIDE.</h2>
         </div>
-        <div className="hostAfter">
-          <Reveal className="roleGraphic"><Image src="/images/hosting/hosting-coordinator.jpeg" alt="Hosting Coordinator" width={900} height={1100}/></Reveal>
-          <Reveal className="hostCopy"><p>FROM HOLDING THE MIC</p><h3>to building the team behind it.</h3><p>The stage taught me how to read a room, think on my feet and keep moving when the script doesn't.</p></Reveal>
-        </div>
-      </section>
 
-      <section id="leadership" className="leadStory">
-        <Reveal>
-          <span className="v2Index">04 / LEADERSHIP, MINUS THE BUZZWORDS</span>
-          <h2>THE VISIBLE TEN MINUTES<br/>USUALLY NEED <em>TEN HOURS.</em></h2>
-        </Reveal>
-        <div className="leadStoryGrid">
-          <Reveal className="outreachGraphic"><Image src="/images/events/event-outreach-coordinator.jpeg" alt="Events and Outreach Coordinator" width={900} height={1100}/></Reveal>
-          <Reveal className="leadManifesto">
-            <p>Sometimes leadership looked like an event plan.</p>
-            <p>Sometimes a sponsorship conversation.</p>
-            <p>Sometimes teaching every Sunday for three months.</p>
-            <p>And sometimes solving a campus problem at 2 AM.</p>
-            <strong>Today: Secretary, Student Council · IMT Hyderabad.</strong>
-          </Reveal>
+        <div className="modeButtons">
+          <button
+            className={stageMode === "host" ? "active" : ""}
+            onClick={() => setStageMode("host")}
+          >
+            HOST
+          </button>
+          <button
+            className={stageMode === "outreach" ? "active" : ""}
+            onClick={() => setStageMode("outreach")}
+          >
+            EVENTS
+          </button>
+          <button
+            className={stageMode === "dance" ? "active" : ""}
+            onClick={() => setStageMode("dance")}
+          >
+            DANCE
+          </button>
         </div>
-        <Reveal className="rolePath">
-          <span>HOSTING COORDINATOR</span><i>→</i><span>EVENTS & OUTREACH</span><i>→</i><span>STUDENT COUNCIL</span><i>→</i><b>SECRETARY</b>
-        </Reveal>
-      </section>
 
-      <section id="work" className="finmarkStory">
-        <Reveal>
-          <span className="v2Index light">05 / FIN × MARK</span>
-          <h2>I STARTED WITH NUMBERS.<br/>THEN GOT CURIOUS ABOUT <em>CHOICES.</em></h2>
-        </Reveal>
-        <div className="finmarkSplit">
-          <div className="finPanel">
-            <span>FIN</span><h3>What does the data say?</h3>
-            <p>Markets · Portfolio Management · Wealth · Research</p>
-            <Image src="/images/finance/technical-analysis.png" alt="Finance work" width={1200} height={700}/>
+        <div className="stageExperience">
+          <div className="stageVisual">
+            <img
+              src={stageModes[stageMode].image}
+              alt={stageModes[stageMode].title}
+              className="containImage"
+            />
           </div>
-          <div className="markPanel">
-            <span>MARK</span><h3>Why do people care?</h3>
-            <p>Consumer Thinking · Communication · Outreach · Pitches</p>
-            <blockquote>“A number can make the case. A narrative can make it stick.”</blockquote>
+
+          <div className="stageCopy">
+            <span>{stageModes[stageMode].eyebrow}</span>
+            <h3>{stageModes[stageMode].title}</h3>
+            <p>{stageModes[stageMode].copy}</p>
+
+            <div className="modeHint">
+              SWITCH THE MODE ABOVE
+              <span>THE STORY CHANGES.</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="impelzBlock">
+          <div className="impelzCopy">
+            <span>FEATURED MOMENT</span>
+            <h3>HOSTING IMPELZ.</h3>
+            <p>
+              Hosting IMPELZ — IMT Hyderabad&apos;s inter-college event — was
+              one of those moments where preparation, crowd energy and
+              spontaneity had to work together in real time.
+            </p>
+          </div>
+
+          <div className="videoFrame">
+            <video controls playsInline preload="metadata">
+              <source src="/impelz-hosting.mp4" type="video/mp4" />
+            </video>
+            <span>PRESS PLAY / SOUND ON</span>
+          </div>
+        </div>
+
+        <div className="trophyStrip">
+          <div className="trophyText">
+            <span>DANCE FILES</span>
+            <h3>THE TROPHY CABINET.</h3>
+            <p>Clicking was never required to make a trophy feel good.</p>
+          </div>
+
+          <div className="trophyImages">
+            <img src="/dance-trophy.jpeg" alt="Dance trophy" />
+            <img src="/dance-02.jpeg" alt="Dance competition" />
+            <img src="/dance-03.jpeg" alt="Dance achievement" />
+            <img src="/dance-04.jpeg" alt="Dance trophy achievement" />
           </div>
         </div>
       </section>
 
-      <section className="writingStory">
-        <Reveal>
-          <span className="v2Index">06 / NOTES FROM MY HEAD</span>
-          <h2>I WRITE ABOUT THINGS<br/><em>I END UP OVERTHINKING.</em></h2>
-        </Reveal>
-        <div className="thoughtList">
-          {thoughts.map(([tag,title],i)=><Reveal className="thoughtRow" key={title}><span>0{i+1} · {tag}</span><h3>{title}</h3><b>SOON ↗</b></Reveal>)}
+      <section className="marketingSection" id="marketing">
+        <div className="marketingBig">
+          <span>05 / FINMARK</span>
+          <h2>
+            FINANCE
+            <br />
+            <i>MEETS</i>
+            <br />
+            MARKETING.
+          </h2>
         </div>
-        <a className="linkedinCTA" href={linkedin} target="_blank">FIND ME ON LINKEDIN ↗</a>
-      </section>
 
-      <section id="offclock" className="offStory">
-        <Reveal>
-          <span className="v2Index light">07 / OFF THE CLOCK</span>
-          <h2>MY ENTIRE PERSONALITY<br/>ISN'T <em>EXCEL.</em></h2>
-        </Reveal>
-        <div className="travelMoment">
-          <Image src="/images/journey/journey-16.jpeg" alt="Sahil travelling in the mountains" fill />
-          <div className="travelShade"/>
-          <div><span>TRAVELLING</span><h3>IF THERE'S A MOUNTAIN,<br/>I'M PROBABLY GOING.</h3></div>
-        </div>
-        <div className="danceMoment">
-          <Reveal className="dancePhoto"><Image src="/images/dance/dance-trophy.jpeg" alt="Dance competition trophy" width={1000} height={1200}/></Reveal>
-          <Reveal className="danceCopy"><span>DANCING</span><h3>A TROPHY<br/><em>OR FOUR.</em></h3><p>Sometimes I stop analysing and simply perform. Competitive enough to enjoy the stage. Lucky enough to bring a few trophies back.</p></Reveal>
-        </div>
-        <div className="momentWall">
-          {moments.map((n,i)=><Reveal className={`moment m${i+1}`} key={n}><Image src={`/images/journey/journey-${n}.jpeg`} alt="A moment from Sahil's journey" width={700} height={900}/></Reveal>)}
-        </div>
-      </section>
+        <div className="marketingCopy">
+          <p>
+            I major in Finance and Marketing because I am interested in both
+            sides of a decision: <strong>what the numbers say</strong> and{" "}
+            <strong>why people act on them.</strong>
+          </p>
 
-      <footer className="v2Footer">
-        <Reveal>
-          <span className="v2Index light">08 / FOR NOW</span>
-          <h2>STILL FIGURING OUT<br/>THE EXACT TITLE.</h2>
-          <p>Pretty clear about the direction.</p>
-          <strong>FINANCE × MARKETING × PEOPLE</strong>
-          <div className="v2Links">
-            <a href={linkedin} target="_blank">LINKEDIN ↗</a>
-            <a href="mailto:YOUR-EMAIL-HERE">LET'S TALK ↗</a>
-            <a href="/documents/anand-rathi-lor.pdf" target="_blank">LOR ↗</a>
+          <p>
+            FinMark is where I want to document markets, consumer behaviour,
+            financial products and the communication behind them.
+          </p>
+
+          <div className="comingSoon">
+            <span>BUILDING IN PUBLIC</span>
+            LINKEDIN POSTS / MARKET STORIES / MARKETING OBSERVATIONS
           </div>
-          <small>© 2026 SAHIL LODHA · BUILT FROM MORE PHOTOS THAN STRICTLY NECESSARY.</small>
-        </Reveal>
-      </footer>
+        </div>
+      </section>
+
+      <section className="offClockSection" id="off-clock">
+        <div className="offClockTitle">
+          <span>06 / OFF THE CLOCK</span>
+          <h2>I DON&apos;T ONLY COLLECT METRICS.</h2>
+          <p>I collect places, stages and stories too.</p>
+        </div>
+
+        <div className="travelGrid">
+          <figure className="travelLarge">
+            <img src="/journey-01.jpeg" alt="Travel journey" />
+            <figcaption>
+              <span>01</span>
+              SOMEWHERE ABOVE THE NOISE
+            </figcaption>
+          </figure>
+
+          <figure>
+            <img src="/journey-02.jpeg" alt="Travel memory" />
+            <figcaption>
+              <span>02</span>
+              OUT OF OFFICE
+            </figcaption>
+          </figure>
+
+          <figure>
+            <img src="/journey-03.jpeg" alt="Mountain journey" />
+            <figcaption>
+              <span>03</span>
+              MOUNTAINS &gt; MEETINGS
+            </figcaption>
+          </figure>
+
+          <figure className="travelWide">
+            <img src="/journey-04.jpeg" alt="Travel story" />
+            <figcaption>
+              <span>04</span>
+              THE LONGER ROUTE
+            </figcaption>
+          </figure>
+
+          <figure>
+            <img src="/journey-05.jpeg" alt="Travel experience" />
+            <figcaption>
+              <span>05</span>
+              NEXT STOP?
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section className="closingSection">
+        <div className="closingTop">
+          <span>YOU MADE IT THIS FAR.</span>
+          <span>SO WE SHOULD PROBABLY TALK.</span>
+        </div>
+
+        <h2>
+          LET&apos;S BUILD
+          <br />
+          SOMETHING <i>WORTH</i>
+          <br />
+          TALKING ABOUT.
+        </h2>
+
+        <div className="closingLinks">
+          <a
+            href="https://www.linkedin.com/in/sahil-lodha-012a63265/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            LINKEDIN ↗
+          </a>
+
+          <a href="mailto:sahil@example.com">EMAIL ↗</a>
+
+          <button onClick={() => scrollTo("home")}>BACK TO TOP ↑</button>
+        </div>
+
+        <div className="closingFooter">
+          <span>SAHIL LODHA</span>
+          <span>FINANCE × MARKETING × LEADERSHIP</span>
+          <span>2026</span>
+        </div>
+      </section>
+
+      {selectedMetric && (
+        <div
+          className="metricModal"
+          onClick={() => setSelectedMetric(null)}
+        >
+          <div
+            className="metricModalCard"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              className="modalClose"
+              onClick={() => setSelectedMetric(null)}
+            >
+              ×
+            </button>
+
+            <span>INTERNSHIP CASE FILE</span>
+            <strong>{selectedMetric[0]}</strong>
+            <h3>{selectedMetric[1]}</h3>
+            <p>{selectedMetric[2]}</p>
+
+            <div className="modalFooter">
+              ANAND RATHI · B2B BUSINESS DEVELOPMENT · 2026
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
